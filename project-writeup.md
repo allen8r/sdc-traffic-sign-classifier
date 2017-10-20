@@ -243,55 +243,55 @@ The model was able to correctly guess 5 of the 5 traffic signs, which gives an a
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
 
-* The model predicted that the first image is an ahead only sign with a probability of 26.7%. The image contains an ahead only sign. The top five softmax probabilities were:
+* The model predicted that the first image is an ahead only sign with a probability of 99.9%. The image contains an ahead only sign. The top five softmax probabilities were:
 
 | Probability         	|     Prediction   	        					| 
 |:----------------------|:----------------------------------------------| 
-| *0.267*            	| *Ahead only*    			            	| 
-| 0.124     			| Speed limit (60km/h)			    			|
-| 0.090					| Turn left ahead		        				|
-| 0.087	      			| Go straight or right    		 				|
-| 0.059				    | No vehicles        					        |
+| *9.999e-01*          	| *Ahead only*      			            	| 
+| 6.368e-07    			| Speed limit (60km/h)			    			|
+| 2.198e-08				| Turn left ahead		        				|
+| 1.592e-08    			| Go straight or right    		 				|
+| 9.133e-10			    | No vehicles        					        |
 
 
-* The second image results from the model show a somewhat lower probability of 19.9% that it is a children crossing sign. But the next 4 probabilites are relatively much lower in prediction probability. The image contains a children crossing sign. The top five softmax probabilities were:
-
-| Probability         	|     Prediction   	        					| 
-|:----------------------|:----------------------------------------------| 
-| *0.199*       		| *Children crossing*			            	| 
-| 0.064     			| Road narrows on the right		    			|
-| 0.063					| Dangerous curve to the right     				|
-| 0.052	      			| Bicycles crossing		    	 				|
-| 0.045				    | Speed limit (60km/h)     				        |
-
-* For the third image, the model gives a probability that it is a speed limit 30km/h sign. The image does contain a speed limit 30km/h sign. The top five softmax probabilities were:
+* The model is almost certain that the image contains a children crossing sign with a probability of 99.9%. The image does, in fact, contain a children crossing sign. The top five softmax probabilities were:
 
 | Probability         	|     Prediction   	        					| 
 |:----------------------|:----------------------------------------------| 
-| *0.320*        		| *Speed limit (30km/h)*		            	| 
-| 0.175     			| Speed limit (50km/h)			       			|
-| 0.123					| Speed limit (70km/h)			    			|
-| 0.075	      			| Speed limit (20km/h)		    				|
-| 0.033				    | Speed limit (80km/h)        			        |
+| *9.999e-01*      		| *Children crossing*			            	| 
+| 1.425e-06    			| Road narrows on the right		    			|
+| 1.257e-06				| Dangerous curve to the right     				|
+| 4.062e-07    			| Bicycles crossing		    	 				|
+| 2.020e-07			    | Speed limit (60km/h)     				        |
 
-* The model is 31.2% sure that the fourth image is a turn-right sign; and the image does contain a turn-right sign. The top five softmax probabilities were:
+* For the third image, the model gives a probability of 99.9% that it is a speed limit 30km/h sign. The image does contain a speed limit 30km/h sign. The top five softmax probabilities were:
+
+| Probability         	|     Prediction   	        					| 
+|:----------------------|:----------------------------------------------| 
+| *9.999e-01*      		| *Speed limit (30km/h)*		            	| 
+| 5.147e-07    			| Speed limit (50km/h)			       			|
+| 2.842e-09				| Speed limit (70km/h)			    			|
+| 2.312e-11    			| Speed limit (20km/h)		    				|
+| 3.332e-13			    | Speed limit (80km/h)        			        |
+
+* The model is 100.0% sure that the fourth image is a turn-right sign; and the image does contain a turn-right sign. The top five softmax probabilities were:
 
 | Probability         	|     Prediction               					| 
 |:----------------------|:----------------------------------------------| 
-| *0.312*        		| *Turn right ahead*			            	| 
-| 0.099     			| Keep left			    		    			|
-| 0.044					| Go straight or left	        				|
-| 0.032	      			| Ahead only		    		 				|
-| 0.027				    | Yield                					        |
+| *1.000e+00*      		| *Turn right ahead*			            	| 
+| 5.897e-10    			| Keep left			    		    			|
+| 2.398e-12				| Go straight or left	        				|
+| 7.220e-13    			| Ahead only		    		 				|
+| 4.185e-13			    | Yield                					        |
 
-* For the fifth image, the model is very sure that this is a yield sign (probability of 0.893). Indeed the image does contain a yield sign. The top five softmax probabilities were:
+* For the fifth image, the model is very sure that this is a yield sign (probability of 100.0%). Indeed the image does contain a yield sign. The top five softmax probabilities were:
 
 | Probability         	|     Prediction   	        					| 
 |:----------------------|:----------------------------------------------| 
-| *0.893*        		| *Yield*						            	| 
-| 0.385     			| No vehicles					    			|
-| 0.290					| Priority road			        				|
-| 0.228	      			| Ahead only		    		 				|
-| 0.206				    | No passing        					        |
+| *1.000e+00*     		| *Yield*						            	| 
+| 8.034e-23    			| No vehicles					    			|
+| 6.507e-27				| Priority road			        				|
+| 1.308e-29    			| Ahead only		    		 				|
+| 1.386e-30			    | No passing        					        |
 
 

@@ -20243,20 +20243,21 @@ a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###### Top 5 Softmax Probabilities ######</span>
 
 <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
     <span class="n">saver</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="s1">&#39;./model/lenet&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model restored.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model restored.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     
-    <span class="n">top_probs</span><span class="p">,</span> <span class="n">class_labels</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">top_k</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">X_pred</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
+    <span class="n">softmax_probs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="o">=</span><span class="n">logits</span><span class="p">)</span>
+    <span class="n">top_probs</span><span class="p">,</span> <span class="n">class_labels</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">top_k</span><span class="p">(</span><span class="n">softmax_probs</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">X_pred</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
     <span class="c1"># NOTE: class_labels are the indicies (which happen to be the class labels for the traffic signs)</span>
     <span class="c1"># corresponding to the top probabilities</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="n">top_probs</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">top_probs</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sign_labels</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_labels</span><span class="p">):</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
@@ -20282,11 +20283,18 @@ a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>INFO:tensorflow:Restoring parameters from ./model/lenet
 Model restored.
-[[ 26.6695137   12.40279961   9.0363884    8.71426392   5.85560083]
- [ 19.89128494   6.43030071   6.30514431   5.17498064   4.47676325]
- [ 32.02019501  17.54056168  12.34169197   7.52989483   3.29032612]
- [ 31.1642971    9.91294956   4.40828037   3.20767808   2.66226077]
- [ 89.34210968  38.46640015  29.0452404   22.83588409  20.59109688]]
+
+[[  9.99999404e-01   6.36860818e-07   2.19801528e-08   1.59269948e-08
+    9.13339071e-10]
+ [  9.99996543e-01   1.42550039e-06   1.25780286e-06   4.06245476e-07
+    2.02095464e-07]
+ [  9.99999523e-01   5.14724604e-07   2.84272272e-09   2.31205402e-11
+    3.33254366e-13]
+ [  1.00000000e+00   5.89735705e-10   2.39888816e-12   7.22095289e-13
+    4.18526135e-13]
+ [  1.00000000e+00   8.03452245e-23   6.50733595e-27   1.30831761e-29
+    1.38616109e-30]] 
+
 Sign# 1: [&#39;Ahead only&#39;, &#39;Speed limit (60km/h)&#39;, &#39;Turn left ahead&#39;, &#39;Go straight or right&#39;, &#39;No vehicles&#39;]
 Sign# 2: [&#39;Children crossing&#39;, &#39;Road narrows on the right&#39;, &#39;Dangerous curve to the right&#39;, &#39;Bicycles crossing&#39;, &#39;Speed limit (60km/h)&#39;]
 Sign# 3: [&#39;Speed limit (30km/h)&#39;, &#39;Speed limit (50km/h)&#39;, &#39;Speed limit (70km/h)&#39;, &#39;Speed limit (20km/h)&#39;, &#39;Speed limit (80km/h)&#39;]
