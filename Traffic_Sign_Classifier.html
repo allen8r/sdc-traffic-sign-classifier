@@ -11800,7 +11800,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The pickled German Traffic Signs Data Set can be downloaded from <a href="https://d17h27t6h515a5.cloudfront.net/topher/2017/February/5898cd6f_traffic-signs-data/traffic-signs-data.zip">here</a>. Images in the pickle files have been resized to 32 x 32 pixels.</p>
+<p>The pickled German Traffic Signs Dataset can be downloaded <a href="https://d17h27t6h515a5.cloudfront.net/topher/2017/February/5898cd6f_traffic-signs-data/traffic-signs-data.zip">here</a>. Images in the pickle files have been resized to 32 x 32 pixels.</p>
 
 </div>
 </div>
@@ -11896,7 +11896,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Replace each question mark with the appropriate value. </span>
@@ -11921,6 +11921,7 @@ div#notebook {
 <span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of training examples =&quot;</span><span class="p">,</span> <span class="n">n_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of validation examples =&quot;</span><span class="p">,</span> <span class="n">n_validation</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of testing examples =&quot;</span><span class="p">,</span> <span class="n">n_test</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image data shape =&quot;</span><span class="p">,</span> <span class="n">image_shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of classes =&quot;</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)</span>
@@ -11941,6 +11942,7 @@ div#notebook {
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Number of training examples = 34799
+Number of validation examples = 4410
 Number of testing examples = 12630
 Image data shape = (32, 32, 3)
 Number of classes = 43
@@ -19470,17 +19472,23 @@ Model saved.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###### Accuracy of the Test set ######</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###### Accuracy of the model on the Datasets ######</span>
 
 <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
     <span class="n">saver</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="s1">&#39;./model/lenet&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model restored.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model restored.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training set accuracy: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">train_accuracy</span><span class="p">))</span>
+    
+    <span class="n">validation_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training set accuracy: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">validation_accuracy</span><span class="p">))</span>
     
     <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test set accuracy: </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_accuracy</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test set accuracy    : </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_accuracy</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -19499,7 +19507,10 @@ Model saved.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>INFO:tensorflow:Restoring parameters from ./model/lenet
 Model restored.
-Test set accuracy: 0.950
+
+Training set accuracy: 0.997
+Training set accuracy: 0.965
+Test set accuracy    : 0.950
 </pre>
 </div>
 </div>
@@ -20232,7 +20243,7 @@ a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###### Top 5 Softmax Probabilities ######</span>
@@ -20241,8 +20252,17 @@ a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
     <span class="n">saver</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="s1">&#39;./model/lenet&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model restored.&#39;</span><span class="p">)</span>
     
-    <span class="n">top_probs</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">top_k</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">X_pred</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
+    <span class="n">top_probs</span><span class="p">,</span> <span class="n">class_labels</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">top_k</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">X_pred</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
+    <span class="c1"># NOTE: class_labels are the indicies (which happen to be the class labels for the traffic signs)</span>
+    <span class="c1"># corresponding to the top probabilities</span>
+    
     <span class="nb">print</span><span class="p">(</span><span class="n">top_probs</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sign_labels</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_labels</span><span class="p">):</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">sign_labels</span><span class="p">:</span>
+            <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sign_dict</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sign# </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
     
 </pre></div>
 
@@ -20262,20 +20282,16 @@ a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>INFO:tensorflow:Restoring parameters from ./model/lenet
 Model restored.
-TopKV2(values=array([[ 26.6695137 ,  12.40279961,   9.0363884 ,   8.71426392,
-          5.85560083],
-       [ 19.89128494,   6.43030071,   6.30514431,   5.17498064,
-          4.47676325],
-       [ 32.02019501,  17.54056168,  12.34169197,   7.52989483,
-          3.29032612],
-       [ 31.1642971 ,   9.91294956,   4.40828037,   3.20767808,
-          2.66226077],
-       [ 89.34210968,  38.46640015,  29.0452404 ,  22.83588409,
-         20.59109688]], dtype=float32), indices=array([[35,  3, 34, 36, 15],
-       [28, 24, 20, 29,  3],
-       [ 1,  2,  4,  0,  5],
-       [33, 39, 37, 35, 13],
-       [13, 15, 12, 35,  9]], dtype=int32))
+[[ 26.6695137   12.40279961   9.0363884    8.71426392   5.85560083]
+ [ 19.89128494   6.43030071   6.30514431   5.17498064   4.47676325]
+ [ 32.02019501  17.54056168  12.34169197   7.52989483   3.29032612]
+ [ 31.1642971    9.91294956   4.40828037   3.20767808   2.66226077]
+ [ 89.34210968  38.46640015  29.0452404   22.83588409  20.59109688]]
+Sign# 1: [&#39;Ahead only&#39;, &#39;Speed limit (60km/h)&#39;, &#39;Turn left ahead&#39;, &#39;Go straight or right&#39;, &#39;No vehicles&#39;]
+Sign# 2: [&#39;Children crossing&#39;, &#39;Road narrows on the right&#39;, &#39;Dangerous curve to the right&#39;, &#39;Bicycles crossing&#39;, &#39;Speed limit (60km/h)&#39;]
+Sign# 3: [&#39;Speed limit (30km/h)&#39;, &#39;Speed limit (50km/h)&#39;, &#39;Speed limit (70km/h)&#39;, &#39;Speed limit (20km/h)&#39;, &#39;Speed limit (80km/h)&#39;]
+Sign# 4: [&#39;Turn right ahead&#39;, &#39;Keep left&#39;, &#39;Go straight or left&#39;, &#39;Ahead only&#39;, &#39;Yield&#39;]
+Sign# 5: [&#39;Yield&#39;, &#39;No vehicles&#39;, &#39;Priority road&#39;, &#39;Ahead only&#39;, &#39;No passing&#39;]
 </pre>
 </div>
 </div>
@@ -20326,7 +20342,7 @@ TopKV2(values=array([[ 26.6695137 ,  12.40279961,   9.0363884 ,   8.71426392,
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Visualize your network&#39;s feature maps here.</span>
