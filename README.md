@@ -3,7 +3,7 @@
 <img width="640" src="./visuals/autobahn-speedlimit.jpg">
 ---
 
-###The Project
+### The Project
 
 Using techniques from deep neural networks and convolutional neural networks I build a neural network classifier to identify German traffic signs. I train and validate a model so it can classify traffic sign images using the [German Traffic Sign Dataset](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/5898cd6f_traffic-signs-data/traffic-signs-data.zip). After the model is trained, I then try out the model on images of German traffic signs that I find on the web.
 
